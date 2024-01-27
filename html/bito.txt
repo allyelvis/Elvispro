@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class BaseConverter {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Get the number to be converted
+        System.out.println("Enter the number to be converted:");
+        int number = input.nextInt();
+
+        // Get the base of the number
+        System.out.println("Enter the base of the number:");
+        int base = input.nextInt();
+
+        // Get the target base
+        System.out.println("Enter the target base:");
+        int targetBase = input.nextInt();
+
+        // Convert the number to the target base
+        String convertedNumber = Integer.toString(number, targetBase);
+
+        // Print the converted number
+        System.out.println("The converted number is: " + convertedNumber);
+    }
+}

@@ -2,7 +2,19 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/.vscode" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/CredentialProvider.Microsoft.Tests/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/CredentialProvider.Microsoft.Tests/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/CredentialProvider.Microsoft/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/CredentialProvider.Microsoft/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/src/Authentication.Tests/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/src/Authentication.Tests/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/src/Authentication/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/Kgh/artifacts-credprovider-master/artifacts-credprovider-master/src/Authentication/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/Poskgh/webapp/storage/framework/testing/disks" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Program Files (x86)/IIS Express/Asp.Net Core Module" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

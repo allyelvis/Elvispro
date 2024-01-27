@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "API Integrator Extension",
+  "version": "1.0",
+  "description": "An extension to integrate with APIs and display data in the browser.",
+  "icons": {},
+  "permissions": ["http://*/", "https://*/"],
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
