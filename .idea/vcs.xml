@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Kgh" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Kgh.worktrees/master" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Poskgh" vcs="Git" />
   </component>
 </project>
