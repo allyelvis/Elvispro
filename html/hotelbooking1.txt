@@ -1,0 +1,178 @@
+// client/src/App.js
+// This is the main file that renders the React components
+
+// Import the required modules
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+// Define a custom component for the App
+function App() {
+  // Define the state variables for the booking form
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [checkIn, setCheckIn] = useState(new Date());
+  const [checkOut, setCheckOut] = useState(new Date());
+  const [roomType, setRoomType] = useState("Single");
+  const [roomNumber, setRoomNumber] = useState(0);
+
+  // Define the state variable for the bookings list
+  const [bookings, setBookings] = useState([]);
+
+  // Define a function to fetch the bookings from the server
+  const fetchBookings = async () => {
+    try {
+      // Send a GET request to the /bookings route
+      const response = await axios.get("http://localhost:3000/bookings");
+      // Set the bookings state to the response data
+      setBookings(response.data);
+    } catch (err) {
+      // Handle any errors
+      console.error(err.message);
+    }
+  };
+
+  // Define a function to create a new booking and send it to the server
+  const createBooking = async (e) => {
+    // Prevent the default form submission behavior
+    e.preventDefault();
+    try {
+      // Create a new booking object from the state variables
+      const newBooking = {
+        name,
+        email,
+        phone,
+        checkIn,
+        checkOut,
+        roomType,
+        roomNumber,
+      };
+      // Send a POST request to the /bookings route with the new booking object
+      const response = await axios.post("http://localhost:3000/bookings", newBooking);
+      // Set the bookings state to include the new booking
+      setBookings([...bookings, response.data]);
+      // Clear the form fields
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCheckIn(new Date());
+      setCheckOut(new Date());
+      setRoomType("Single");
+      setRoomNumber(0);
+    } catch (err) {
+      // Handle any errors
+      console.error(err.message);
+    }
+  };
+
+  // Define a function to delete a booking by id and remove it from the server
+  const deleteBooking = async (id) => {
+    try {
+      // Send a DELETE request to the /bookings/:id route with the booking id
+      await axios.delete(`http://localhost:3000/bookings/${id}`);
+      // Set the bookings state to exclude the deleted booking
+      setBookings(bookings.filter((booking) => booking._id !== id));
+    } catch (err) {
+      // Handle any errors
+      console.error(err.message);
+    }
+  };
+
+  // Define a function to calculate the total price of a booking
+  const calculatePrice = (booking) => {
+    // Define the price per night for each room type
+    const prices = {
+      Single: 100,
+      Double: 150,
+      Suite: 200,
+    };
+    // Calculate the number of nights by subtracting the check in date from the check out date
+    const nights = (new Date(booking.checkOut) - new Date(booking.checkIn)) / (1000 * 60 * 60 * 24);
+    // Calculate the total price by multiplying the price per night by the number of nights
+    const totalPrice = prices[booking.roomType] * nights;
+    // Return the total price
+    return totalPrice;
+  };
+
+  // Use the useEffect hook to fetch the bookings when the component mounts
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  // Return the JSX code for rendering the component
+  return (
+    <div className="container">
+      <h1 className="text-center">Hotel Booking System</h1>
+      <div className="row">
+        <div className="col-md-6">
+          <h2>Make a Reservation</h2>
+          <form onSubmit={createBooking}>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone</label>
+              <input
+                type="tel"
+                className="form-control"
+                id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="checkIn">Check In</label>
+              <DatePicker
+                className="form-control"
+                id="checkIn"
+                selected={checkIn}
+                onChange={(date) => setCheckIn(date)}
+                minDate={new Date()}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="checkOut">Check Out</label>
+              <DatePicker
+                className="form-control"
+                id="checkOut"
+                selected={checkOut}
+                onChange={(date) => setCheckOut(date)}
+                minDate={checkIn}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="roomType">Room Type</label>
+              <select
+                className="form-control"
+                id="roomType"
+                value={roomType}
+                onChange={(e) => setRoomType(e.target.value)}
+                required
+              >
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Suite">Suite
