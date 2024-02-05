@@ -60,6 +60,8 @@
         "fullstackspider.visual-nuget",
         "andrewbutson.vscode-openai",
         "dotjoshjohnson.xml",
-        "local-smart.excel-live-server"
+        "local-smart.excel-live-server",
+        "ms-vscode.js-debug-nightly",
+        "achil.vscode-javascript-repl"
     ]
 }
